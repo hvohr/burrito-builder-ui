@@ -13,13 +13,17 @@ const [orders, setOrders] = useState([])
     ).catch((err) => console.error("Error fetching:", err));
   });
 
+const submitOrder = (newOrder) => {
+  const newOrder= {name: newOrder.name, ingredients: newOrder.ingredients}
+  
+}  
+
   return (
     <main className="App">
       <header>
         <h1>Burrito Builder</h1>
         <OrderForm />
       </header>
-
       <Orders orders={orders} />
     </main>
   );
