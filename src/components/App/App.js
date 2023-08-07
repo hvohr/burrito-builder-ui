@@ -6,6 +6,7 @@ import OrderForm from "../../components/OrderForm/OrderForm";
 
 function App() {
 const [orders, setOrders] = useState([])
+const [newOrder, setNewOrder] = useState('')
 
 
 function getAllOrders() {
@@ -15,12 +16,13 @@ function getAllOrders() {
 }
   useEffect(() => {
     getAllOrders()
-  }, [orders]);
+  }, [newOrder]);
 
 const submitOrder = (newOrder) => {
+  setNewOrder(newOrder)
   const newOrderList= {name: newOrder.name, ingredients: newOrder.ingredients}
   postOrders(newOrder).then(data => {
-    setOrders([...data, newOrderList])
+    setOrders([...orders, newOrderList])
   })
 }  
 
