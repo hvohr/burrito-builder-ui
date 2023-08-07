@@ -10,6 +10,7 @@ describe('Form should look and function as it should', () => {
       .get('section').children().should('have.lengthOf', 3)
       .get('p').invoke('text').should('contain', "Nothing Selected")
       .get("[name ='beans']").should('be.visible')
+      .get("[name ='jalapenos']").should('be.visible')
       .get(':nth-child(15)').click()
       .get('.user-form-warning').should('be.visible')
   })
