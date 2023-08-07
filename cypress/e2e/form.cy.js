@@ -35,5 +35,6 @@ describe('Form should look and function as it should', () => {
       .get('section').children().should('have.lengthOf', 4)
       .get('section').invoke('text').should('contain', "Hollis")
       .get('.user-form-warning').should('not.exist')
+      .get('p').invoke('text').should('contain', "Nothing Selected")
   })
 })
