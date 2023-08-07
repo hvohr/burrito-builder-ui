@@ -4,8 +4,14 @@ function OrderForm(props) {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
 
-  function handleSubmit(e) {
+  function submitOrder(e) {
     e.preventDefault();
+    const newOrder = {
+      id: Date.now(),
+      name: name,
+      ingredients: ingredients,
+    }
+    props.addOrder(newOrder)
     clearInputs();
   }
 
@@ -33,7 +39,7 @@ function OrderForm(props) {
       <button
         key={ingredient}
         name={ingredient}
-        // onClick={(e) => }
+        onClick={(e) => setIngredients(e.target.value)}
       >
         {ingredient}
       </button>
@@ -47,14 +53,11 @@ function OrderForm(props) {
         placeholder="Name"
         name="name"
         value={name}
-        // onChange={(e) => }
+        onChange={(e) =>setName(e.target.value)}
       />
-
       {ingredientButtons}
-
       <p>Order: {ingredients.join(", ") || "Nothing selected"}</p>
-
-      <button onClick={(e) => handleSubmit(e)}>Submit Order</button>
+      <button onClick={(e) => submitOrder(e)}>Submit Order</button>
     </form>
   );
 }
