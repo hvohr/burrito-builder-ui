@@ -44,7 +44,10 @@ function OrderForm(props) {
         key={ingredient}
         name={ingredient}
         value={ingredient}
-        onClick={(e) => setIngredients([...ingredients, e.target.value])}
+        onClick={(e) => {
+          e.preventDefault();
+          setIngredients([...ingredients, e.target.value])
+        }}
       >
         {ingredient}
       </button>
@@ -58,10 +61,11 @@ function OrderForm(props) {
         placeholder="Name"
         name="name"
         value={name}
-        onChange={(e) =>setName(e.target.value)}
+        onChange={(e) => setName(e.target.value)}
       />
       {ingredientButtons}
-      <p>Order: {ingredients.join(", ") || "Nothing selected"}</p>
+      {ingredients.length === 0 && <p>Nothing selected</p>}
+      {ingredients.length !== 0 && <p>Order: {ingredients.join(', ')}</p>}
       <button onClick={(e) => submitOrder(e)}>Submit Order</button>
     </form>
   );
