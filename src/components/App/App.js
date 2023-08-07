@@ -7,17 +7,20 @@ import OrderForm from "../../components/OrderForm/OrderForm";
 function App() {
 const [orders, setOrders] = useState([])
 
+
+function getAllOrders() {
+  getOrders().then(
+    data => setOrders(data.orders)
+  ).catch((err) => console.error("Error fetching:", err));
+}
   useEffect(() => {
-    getOrders().then(
-      data => setOrders(data.orders)
-    ).catch((err) => console.error("Error fetching:", err));
-  });
+    getAllOrders()
+  }, [orders]);
 
 const submitOrder = (newOrder) => {
   const newOrderList= {name: newOrder.name, ingredients: newOrder.ingredients}
   postOrders(newOrder).then(data => {
-    console.log(data)
-    setOrders([...orders, newOrderList])
+    setOrders([...data, newOrderList])
   })
 }  
 
