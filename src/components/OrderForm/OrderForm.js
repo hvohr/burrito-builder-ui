@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function OrderForm(props) {
   const [name, setName] = useState("");
@@ -11,9 +11,13 @@ function OrderForm(props) {
       name: name,
       ingredients: ingredients,
     }
-    props.addOrder(newOrder)
+    props.submitOrder(newOrder)
     clearInputs();
   }
+
+  useEffect(() => {
+    console.log(ingredients)
+  }, [ingredients])
 
   function clearInputs() {
     setName("");
@@ -39,7 +43,8 @@ function OrderForm(props) {
       <button
         key={ingredient}
         name={ingredient}
-        onClick={(e) => setIngredients(e.target.value)}
+        value={ingredient}
+        onClick={(e) => setIngredients([...ingredients, e.target.value])}
       >
         {ingredient}
       </button>

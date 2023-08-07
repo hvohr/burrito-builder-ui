@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { getOrders } from "../../apiCalls";
+import { getOrders, postOrders } from "../../apiCalls";
 import Orders from "../../components/Orders/Orders";
 import OrderForm from "../../components/OrderForm/OrderForm";
 
@@ -14,15 +14,18 @@ const [orders, setOrders] = useState([])
   });
 
 const submitOrder = (newOrder) => {
-  const newOrder= {name: newOrder.name, ingredients: newOrder.ingredients}
-  
+  const newOrderList= {name: newOrder.name, ingredients: newOrder.ingredients}
+  postOrders(newOrder).then(data => {
+    console.log(data)
+    setOrders([...orders, newOrderList])
+  })
 }  
 
   return (
     <main className="App">
       <header>
         <h1>Burrito Builder</h1>
-        <OrderForm />
+        <OrderForm submitOrder={submitOrder} />
       </header>
       <Orders orders={orders} />
     </main>
