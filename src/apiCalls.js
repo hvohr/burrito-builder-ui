@@ -5,7 +5,7 @@ const getOrders = () => {
 const postOrders = (newOrder) => {
   return fetch("http://localhost:3001/api/v1/orders", {
     method: "POST",
-    body: JSON.stringify(newTrick),
+    body: JSON.stringify(newOrder),
     headers: {
       "Content-Type": 'application/json'
     }
@@ -17,4 +17,4 @@ const postOrders = (newOrder) => {
    })
 }
 
-export { getOrders }
+export { getOrders, postOrders }
